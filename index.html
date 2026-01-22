@@ -1,37 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Collapsible Side Nav</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
-    <!-- Sidebar -->
-    <div id="sidebar" class="sidebar">
-        <div class="toggle-btn" onclick="toggleSidebar()">
-            ☰
-        </div>
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 60px;
+    height: 100vh;
+    background-color: #1e1e2f;
+    color: white;
+    transition: width 0.3s ease;
+    overflow: hidden;
+}
 
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Messages</a></li>
-            <li><a href="#">Settings</a></li>
-        </ul>
-    </div>
+/* Expanded sidebar */
+.sidebar.active {
+    width: 220px;
+}
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <h1>Main Content</h1>
-        <p>Click the menu icon to expand or collapse the sidebar.</p>
-    </div>
+/* Toggle button */
+.toggle-btn {
+    font-size: 24px;
+    padding: 15px;
+    cursor: pointer;
+    text-align: center;
+}
 
-    <script>
-        function toggleSidebar() {
-            document.getElementById("sidebar").classList.toggle("active");
-        }
-    </script>
+/* Nav links (hidden by default) */
+.nav-links {
+    list-style: none;
+    margin-top: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
 
-</body>
-</html>
+/* Show nav links only when expanded */
+.sidebar.active .nav-links {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.nav-links li {
+    padding: 15px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.nav-links a:hover {
+    background-color: #34344e;
+    border-radius: 4px;
+}
+
+/* Main content */
+.main-content {
+    margin-left: 60px;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.sidebar.active ~ .main-content {
+    margin-left: 220px;
+}
+
